@@ -1,0 +1,1 @@
+{{ $event->causer->name }} created a task, <a href="/posts/{{ $event->subject_id}}">{{ $event->subject->title}}</a>, {{ $event->created_at->diffForHumans() }}
