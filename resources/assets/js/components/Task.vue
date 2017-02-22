@@ -43,25 +43,15 @@
         },
         methods: {
             submit() {
-                var self = this;
-                
                 axios.post('/api/tasks/'+ this.task.id +'/comments/store?api_token=' + this.user.api_token, {
                     comment: this.comment
                 }).
-                then(function(comment) {
+                then((comment) => {
                     console.log(comment);
-                    self.comments.push(comment.data);
-                    self.comment = '';
+                    this.comments.push(comment.data);
+                    this.comment = '';
                 });
-            },
-            commentList() {
-                var self = this;
-                
-                axios.get('/api/tasks/'+ this.task.id +'/comments?api_token=' + this.user.api_token, {})
-                .then(function(response) {
-                    self.comments = response.data;
-                });
-            },
+            }
         }
     }
 </script>

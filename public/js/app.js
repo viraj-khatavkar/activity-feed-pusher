@@ -12239,21 +12239,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     methods: {
         submit: function submit() {
-            var self = this;
+            var _this = this;
 
             axios.post('/api/tasks/' + this.task.id + '/comments/store?api_token=' + this.user.api_token, {
                 comment: this.comment
             }).then(function (comment) {
                 console.log(comment);
-                self.comments.push(comment.data);
-                self.comment = '';
-            });
-        },
-        commentList: function commentList() {
-            var self = this;
-
-            axios.get('/api/tasks/' + this.task.id + '/comments?api_token=' + this.user.api_token, {}).then(function (response) {
-                self.comments = response.data;
+                _this.comments.push(comment.data);
+                _this.comment = '';
             });
         }
     }
@@ -12295,7 +12288,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             title: '',
-            tasks: {}
+            tasks: []
         };
     },
     mounted: function mounted() {
@@ -12307,27 +12300,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     methods: {
         add: function add() {
-            var self = this;
+            var _this = this;
+
             axios.post('/api/tasks/store?api_token=' + this.user.api_token, {
                 title: this.title
             }).then(function (task) {
                 console.log(task);
-                self.tasks.push(task.data);
+                _this.tasks.push(task.data);
             });
         },
         taskList: function taskList() {
-            var self = this;
+            var _this2 = this;
+
             axios.get('/api/tasks?api_token=' + this.user.api_token, {}).then(function (response) {
-                self.tasks = response.data;
-            });
-        },
-        delete: function _delete(id) {
-            console.log(id);
-            var self = this;
-            axios.post('/api/tasks/delete?api_token=' + this.user.api_token, {
-                id: id
-            }).then(function (task) {
-                console.log(task);
+                _this2.tasks = response.data;
             });
         }
     }

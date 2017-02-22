@@ -28,7 +28,7 @@
         data() {
             return {
                 title: '',
-                tasks: {}
+                tasks: []
             }
         },
         mounted() {
@@ -40,30 +40,18 @@
         },
         methods: {
             add() {
-                var self = this;
                 axios.post('/api/tasks/store?api_token=' + this.user.api_token, {
                     title: this.title
                 }).
-                then(function(task) {
+                then((task) => {
                     console.log(task);
-                    self.tasks.push(task.data);
+                    this.tasks.push(task.data);
                 });
             },
             taskList() {
-                var self = this;
                 axios.get('/api/tasks?api_token=' + this.user.api_token, {})
-                .then(function(response) {
-                    self.tasks = response.data;
-                });
-            },
-            delete(id) {
-                console.log(id);
-                var self = this;
-                axios.post('/api/tasks/delete?api_token=' + this.user.api_token, {
-                    id: id
-                }).
-                then(function(task) {
-                    console.log(task);
+                .then((response) => {
+                    this.tasks = response.data;
                 });
             }
         }

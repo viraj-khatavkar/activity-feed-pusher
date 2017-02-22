@@ -10,14 +10,16 @@ class TaskController extends Controller
 {
 	public function index(Task $task)
 	{
-		return auth()->user()->tasks()->with('comments')->get();
+		return auth()->user()->tasks;
 	}
 
-    public function store(Task $task)
+    public function store()
     {
-    	return $task->create([
+    	$task = Task::create([
     		'title' => request('title'),
     		'user_id' => auth()->user()->id,
 		]);
+
+        return Task::find($task->id);
     }
 }

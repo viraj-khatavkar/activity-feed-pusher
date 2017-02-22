@@ -12,6 +12,7 @@ class Task extends Model
     use RecordsActivity;
 
     protected $fillable = ['title', 'user_id'];
+    protected $with = ['comments', 'user'];
 
     public function user()
     {
